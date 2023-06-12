@@ -1,10 +1,16 @@
 import React from 'react'
 
 function Links({ alphabet, index }) {
-  var colors = ['red', 'green', 'blue', 'yellow', 'pink', 'teal', 'brown', 'white', 'orange', 'lightblue', 'lightgreen', 'violet'];
+  var colors = ['red', 'green', 'blue', 'yellow', 'pink', 'teal', 'brown', 'orange', 'lightblue', 'lightgreen', 'violet'];
   return (
-    <div className="alpha-box" style={{ backgroundColor: colors[index % colors.length] }}>
-      <a href={`https://example.com/${alphabet}`}>{alphabet}</a>
+    <div>
+      <a href={`https://example.com/${alphabet}`}>
+      <div 
+        className="alpha-box" 
+        style={{ backgroundColor: colors[index % colors.length] }}>
+          {alphabet}
+      </div>
+      </a>
     </div>
   );
 }
@@ -16,23 +22,48 @@ function Main() {
   // Create letter array for alphabets
   var alphabets = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
 
+  window.onload = function() {
+    const heading = document.querySelector('.colorized-heading');
+    if (heading) {
+      const text = heading.textContent;
+      const coloredText = Array.from(text).map(letter => {
+        const randomColor = getRandomColor();
+        return `<span style="color: ${randomColor}">${letter}</span>`;
+      }).join('');
+  
+      heading.innerHTML = coloredText;
+    }
+  };
+
+  function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
   return (
-    <div className="alpha-container">
-      <div className="row-1">
-        {alphabets.map((alphabet, index) => {
-          if(index < 13) {
-            return <Links key={alphabet} alphabet={alphabet} index={index} />
-          }
-          return null;
-        })}
-      </div>
-      <div className="row-2">
-        {alphabets.map((alphabet, index) => {
-          if(index >= 13) {
-            return <Links key={alphabet} alphabet={alphabet} index={index} />
-          }
-          return null;
-        })}
+    <div>
+      <h1 className="colorized-heading">Alphabet Blocks</h1>
+      <div className="alpha-container">
+        <div className="row-1">
+          {alphabets.map((alphabet, index) => {
+            if(index < 13) {
+              return <Links key={alphabet} alphabet={alphabet} index={index} />
+            }
+            return null;
+          })}
+        </div>
+        <div className="row-2">
+          {alphabets.map((alphabet, index) => {
+            if(index >= 13) {
+              return <Links key={alphabet} alphabet={alphabet} index={index} />
+            }
+            return null;
+          })}
+        </div>
       </div>
     </div>
   );
@@ -62,4 +93,14 @@ export default Main;
     // Append the div to the body element
     body.appendChild(div);
   });
+  */
+
+  /*
+  In this updated code, a new getRandomColor() function is added. This function generates a random color code by randomly selecting characters from the set of hexadecimal values (0-9, A-F) and concatenating them to form a valid color code in the format "#RRGGBB".
+
+Within the map() function, each letter is assigned a random color by calling the getRandomColor() function, and the HTML structure with the colored letters is formed.
+
+By using this updated code, the colors of the letters in the <h1> element will be randomized on every page load.
+
+Please make sure to include this updated JavaScript code in your project and ensure that the HTML content includes an element with the class name "colorized-heading".
   */

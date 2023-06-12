@@ -1,7 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap');
+
 body {
     margin: 2rem;
     position: static;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: 'Gaegu', cursive;
 }
+
+h1 {
+    text-align: center;
+    font-size: 10rem;
+    text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.411);
+    margin: 1rem;
+}
+
 .alpha-container {
     display: flex;
     flex-direction: column;
@@ -13,29 +25,31 @@ body {
 .row-1, .row-2 {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    border: 4px solid goldenrod;
     margin-bottom: 20px; /* Add bottom margin for spacing */
 }
 
 .alpha-box {
-    width: 4.5rem;
-    height: 4.5rem;
+    width: 5.7rem;
+    height: 8rem;
     align-items: center;
     background-color: gray;
-    border: 1px solid black;
+    /* border: .5px solid black; */
     display: flex;
     justify-content: center;
-    border-radius: 5px;
-    opacity: .2;
+    /* opacity: .2; */
     z-index: 1;
 }
 
-
-.alpha-box a {
-    text-decoration: none;
-    color: black;
-    font-size: 2rem;
-    position: relative; /* Add relative positioning */
+.alpha-box:hover {
     opacity: 1;
-    z-index: 2;
+    font-size: 8rem;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 7rem;
+    position: relative; /* Add relative positioning */
+    text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.411);
 }
