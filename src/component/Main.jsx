@@ -1,27 +1,46 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-function Links({ alphabet, index }) {
-  var colors = ['red', 'green', 'blue', 'yellow', 'pink', 'teal', 'brown', 'orange', 'lightblue', 'lightgreen', 'violet'];
+function Links({ alphabet }) {
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const boxes = document.getElementsByClassName('alpha-box');
+      Array.from(boxes).forEach((box) => {
+        box.style.backgroundColor = randomColor();
+      });
+    }, 1500);
+
+    return () => {
+      /* Clearing the interval with clearInterval() in the return statement of the useEffect() hook is a best practice to clean up any ongoing processes when the component unmounts or when the dependencies of the useEffect() hook change. It helps prevent memory leaks and ensures that the interval is properly cleared when the component is no longer in use.*/
+      clearInterval(interval);
+    };
+  }, []);
+
+  function randomColor() {
+    const hexadecimal = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += hexadecimal[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
   return (
     <div>
       <a href={`https://example.com/${alphabet}`}>
-      <div 
-        className="alpha-box" 
-        style={{ backgroundColor: colors[index % colors.length] }}>
-          {alphabet}
-      </div>
+        <div className="alpha-box">{alphabet}</div>
       </a>
     </div>
   );
 }
 
+
 function Main() {
 
-  // Define an array of colors
-
+  
   // Create letter array for alphabets
   var alphabets = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
-
+  /*
+  // Define an array of colors
   window.onload = function() {
     const heading = document.querySelector('.colorized-heading');
     if (heading) {
@@ -36,14 +55,14 @@ function Main() {
   };
 
   function getRandomColor() {
-    const letters = '0123456789ABCDEF';
+    const hexadecimal = '0123456789ABCDEF';
     let color = '#';
     for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
+      color += hexadecimal[Math.floor(Math.random() * 16)];
     }
     return color;
   }
-
+*/
   return (
     <div>
       <h1 className="colorized-heading">Alphabet Blocks</h1>
@@ -104,3 +123,22 @@ By using this updated code, the colors of the letters in the <h1> element will b
 
 Please make sure to include this updated JavaScript code in your project and ensure that the HTML content includes an element with the class name "colorized-heading".
   */
+
+
+/*
+function Links({ alphabet, index }) {
+  var colors = ['red', 'green', 'blue', 'yellow', 'pink', 'teal', 'brown', 'orange', 'lightblue', 'lightgreen', 'violet'];
+  return (
+    <div>
+      <a href={`https://example.com/${alphabet}`}>
+      <div 
+        className="alpha-box" 
+        style={{ backgroundColor: colors[index % colors.length] }}>
+          {alphabet}
+      </div>
+      </a>
+    </div>
+  );
+}
+// var colors = ['red', 'green', 'blue', 'yellow', 'pink', 'teal', 'brown', 'orange', 'lightblue', 'lightgreen', 'violet'];
+*/
